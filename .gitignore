@@ -1,0 +1,68 @@
+# ========================
+# Spring Boot / Maven
+# ========================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Application properties avec secrets
+backend/src/main/resources/application-prod.properties
+backend/src/main/resources/application-prod.yml
+backend/.env
+.env
+
+# ========================
+# Angular / Node.js
+# ========================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+frontend/.npm
+
+# ========================
+# IntelliJ IDEA
+# ========================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+# ========================
+# VS Code
+# ========================
+.vscode/
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ========================
+# Logs
+# ========================
+*.log
+logs/
+spring.log
