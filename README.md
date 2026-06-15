@@ -144,6 +144,12 @@ banque-ai/
 
 ## 5. Captures d'écran
 
+### Démonstration vidéo
+
+Une vidéo de démonstration complète de l'application est disponible : **[demo.mp4](demo.mp4)** (cliquez pour télécharger / visionner).
+
+---
+
 ### 5.1 Tableau de bord (Dashboard)
 
 Le tableau de bord affiche les statistiques globales en temps réel : nombre de clients, comptes, opérations et solde total. Les graphiques montrent la répartition des types de comptes et l'évolution mensuelle des opérations débit/crédit.
