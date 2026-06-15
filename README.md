@@ -146,7 +146,11 @@ banque-ai/
 
 ### Démonstration vidéo
 
-Une vidéo de démonstration complète de l'application est disponible : **[demo.mp4](demo.mp4)** (cliquez pour télécharger / visionner).
+Aperçu animé du fonctionnement de l'application (version accélérée) :
+
+![Démonstration de l'application](demo.gif)
+
+> La vidéo complète (qualité originale, son inclus) est disponible au téléchargement : **[demo.mp4](demo.mp4)**.
 
 ---
 
