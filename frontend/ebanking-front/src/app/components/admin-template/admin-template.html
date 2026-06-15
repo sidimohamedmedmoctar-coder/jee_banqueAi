@@ -1,0 +1,85 @@
+<div class="d-flex flex-column vh-100">
+
+  <!-- ── Navbar top ────────────────────────────────────────────────── -->
+  <nav class="navbar navbar-dark bg-dark px-3 flex-shrink-0">
+    <span class="navbar-brand mb-0 h1">🏦 Banque AI</span>
+    <div class="d-flex align-items-center gap-3 text-white">
+      <span class="small">
+        👤 <strong>{{ authService.username }}</strong>
+        <span *ngIf="authService.hasRole('ADMIN')" class="badge bg-warning text-dark ms-1">ADMIN</span>
+      </span>
+      <button class="btn btn-outline-light btn-sm" (click)="handleLogout()">
+        🚪 Déconnexion
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Body : sidebar + contenu ─────────────────────────────────── -->
+  <div class="d-flex flex-grow-1 overflow-hidden">
+
+    <!-- Sidebar -->
+    <nav class="bg-dark text-white d-flex flex-column flex-shrink-0" style="width: 230px;">
+      <ul class="nav nav-pills flex-column p-3 gap-1">
+
+        <li class="nav-item">
+          <a class="nav-link text-white"
+             routerLink="/admin/dashboard"
+             routerLinkActive="active">
+            📊 Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white"
+             routerLink="/admin/customers"
+             routerLinkActive="active">
+            👥 Customers
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white"
+             routerLink="/admin/accounts"
+             routerLinkActive="active">
+            🏦 Accounts
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
+          <a class="nav-link text-white"
+             routerLink="/admin/new-customer"
+             routerLinkActive="active">
+            ➕ New Customer
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
+          <a class="nav-link text-white"
+             routerLink="/admin/users"
+             routerLinkActive="active">
+            🔐 Users
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white"
+             routerLink="/admin/change-password"
+             routerLinkActive="active">
+            🔑 Change Password
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="flex-grow-1 overflow-auto bg-light p-3">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+  <!-- ── Chatbot IA (persiste sur toutes les pages admin) ──────────── -->
+  <app-chatbot></app-chatbot>
+
+</div>

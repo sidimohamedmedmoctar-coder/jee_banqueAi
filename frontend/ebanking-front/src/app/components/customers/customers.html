@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Customers</h5>
+      <a *ngIf="authService.hasRole('ADMIN')" routerLink="/admin/new-customer" class="btn btn-light btn-sm">+ New Customer</a>
+    </div>
+    <div class="card-body">
+
+      <!-- Search bar -->
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by name..."
+          [formControl]="searchKeyword"
+          (keyup.enter)="handleSearchCustomers()"
+        />
+        <button class="btn btn-outline-primary" (click)="handleSearchCustomers()">
+          🔍 Search
+        </button>
+        <button class="btn btn-outline-secondary" (click)="handleGetCustomers()">
+          ↺ Reset
+        </button>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Created by</th>
+              <th>Created at</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of customers">
+              <td>{{ c.id }}</td>
+              <td>{{ c.name }}</td>
+              <td>{{ c.email }}</td>
+              <td><span class="badge bg-secondary">{{ c.createdBy || '—' }}</span></td>
+              <td class="text-muted small">{{ c.createdAt ? (c.createdAt | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
+              <td class="text-center">
+                <button class="btn btn-sm btn-info me-1" (click)="handleAccounts(c)">Accounts</button>
+                <button *ngIf="authService.hasRole('ADMIN')"
+                        class="btn btn-sm btn-warning me-1"
+                        (click)="handleEditCustomer(c)">
+                  ✏️ Edit
+                </button>
+                <button *ngIf="authService.hasRole('ADMIN')"
+                        class="btn btn-sm btn-danger"
+                        (click)="handleDeleteCustomer(c)"
+                        [disabled]="deletingId !== null">
+                  {{ deletingId === c.id ? '...' : 'Delete' }}
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="customers.length === 0">
+              <td colspan="6" class="text-center text-muted">No customers found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">New Customer</h5>
+        </div>
+        <div class="card-body">
+
+          <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+          <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+          <form [formGroup]="newCustomerFormGroup" (ngSubmit)="handleSaveCustomer()">
+
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                [class.is-invalid]="newCustomerFormGroup.get('name')?.invalid && newCustomerFormGroup.get('name')?.touched"
+                formControlName="name"
+                placeholder="Full name"
+              />
+              <div class="invalid-feedback">
+                Name is required (minimum 3 characters).
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                [class.is-invalid]="newCustomerFormGroup.get('email')?.invalid && newCustomerFormGroup.get('email')?.touched"
+                formControlName="email"
+                placeholder="email@example.com"
+              />
+              <div class="invalid-feedback">
+                Please enter a valid email address.
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success" [disabled]="newCustomerFormGroup.invalid">
+                Save
+              </button>
+              <a routerLink="/admin/customers" class="btn btn-secondary">Cancel</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

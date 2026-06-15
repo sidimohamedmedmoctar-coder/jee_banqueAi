@@ -1,0 +1,113 @@
+<div class="container-fluid mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">🔐 Gestion des utilisateurs</h4>
+    <button class="btn btn-success btn-sm" (click)="showCreateForm = !showCreateForm">
+      {{ showCreateForm ? '✕ Annuler' : '➕ Nouvel utilisateur' }}
+    </button>
+  </div>
+
+  <!-- Alertes -->
+  <div *ngIf="errorMessage"   class="alert alert-danger alert-dismissible">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible">
+    {{ successMessage }}
+    <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+  </div>
+
+  <!-- Formulaire de création -->
+  <div *ngIf="showCreateForm" class="card mb-4 shadow-sm border-success">
+    <div class="card-header bg-success text-white">Créer un utilisateur</div>
+    <div class="card-body">
+      <form [formGroup]="createForm" (ngSubmit)="submitCreate()" class="row g-3">
+
+        <div class="col-md-4">
+          <label class="form-label">Username</label>
+          <input formControlName="username" class="form-control"
+                 [class.is-invalid]="createForm.get('username')?.invalid && createForm.get('username')?.touched"
+                 placeholder="ex: johndoe">
+          <div class="invalid-feedback">Min. 3 caractères.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Email</label>
+          <input formControlName="email" type="email" class="form-control"
+                 [class.is-invalid]="createForm.get('email')?.invalid && createForm.get('email')?.touched"
+                 placeholder="email@example.com">
+          <div class="invalid-feedback">Email invalide.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Mot de passe</label>
+          <input formControlName="password" type="password" class="form-control"
+                 [class.is-invalid]="createForm.get('password')?.invalid && createForm.get('password')?.touched"
+                 placeholder="Min. 6 caractères">
+          <div class="invalid-feedback">Min. 6 caractères.</div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">
+            💾 Créer
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Tableau des utilisateurs -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <table class="table table-hover table-bordered mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="text-muted small">{{ user.id }}</td>
+            <td><strong>{{ user.username }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td>
+              <span *ngFor="let role of user.roles"
+                    class="badge me-1"
+                    [ngClass]="role === 'ADMIN' ? 'bg-warning text-dark' : 'bg-secondary'">
+                {{ role }}
+              </span>
+            </td>
+            <td class="text-center">
+              <button *ngIf="!hasRole(user, 'ADMIN')"
+                      class="btn btn-outline-warning btn-sm me-1"
+                      (click)="addAdmin(user)"
+                      title="Ajouter le rôle ADMIN">
+                ⬆ ADMIN
+              </button>
+              <button *ngIf="hasRole(user, 'ADMIN')"
+                      class="btn btn-warning btn-sm me-1"
+                      (click)="removeAdmin(user)"
+                      title="Retirer le rôle ADMIN">
+                ⬇ ADMIN
+              </button>
+              <button class="btn btn-outline-danger btn-sm"
+                      (click)="deleteUser(user)"
+                      title="Supprimer">
+                🗑
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="users.length === 0">
+            <td colspan="5" class="text-center text-muted py-4">Aucun utilisateur.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

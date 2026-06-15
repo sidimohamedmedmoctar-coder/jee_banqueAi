@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow" style="width: 400px;">
+
+    <div class="card-header bg-dark text-white text-center py-4">
+      <h4 class="mb-0">🏦 Banque AI</h4>
+      <small class="text-secondary">Connectez-vous à votre espace</small>
+    </div>
+
+    <div class="card-body p-4">
+
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+
+      <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            [class.is-invalid]="loginFormGroup.get('username')?.invalid && loginFormGroup.get('username')?.touched"
+            formControlName="username"
+            placeholder="ex : admin"
+            autofocus
+          />
+          <div class="invalid-feedback">Le username est requis.</div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            [class.is-invalid]="loginFormGroup.get('password')?.invalid && loginFormGroup.get('password')?.touched"
+            formControlName="password"
+            placeholder="••••••"
+          />
+          <div class="invalid-feedback">Le mot de passe est requis.</div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-dark w-100"
+          [disabled]="loginFormGroup.invalid"
+        >
+          Se connecter
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

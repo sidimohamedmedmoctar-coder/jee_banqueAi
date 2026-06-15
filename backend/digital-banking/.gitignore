@@ -1,5 +1,11 @@
 HELP.md
 target/
+
+### Secrets — ne jamais commiter ###
+.env
+
+### Base de données H2 locale ###
+data/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
