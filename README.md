@@ -146,7 +146,7 @@ banque-ai/
 
 ### Démonstration vidéo
 
-Aperçu animé du fonctionnement de l'application (version accélérée) :
+Aperçu animé du fonctionnement de l'application (proche du temps réel) :
 
 ![Démonstration de l'application](demo.gif)
 
